@@ -114,7 +114,7 @@ jobs:
           cargo tarpaulin --out Xml --all --timeout 120 || true
       
       - name: Upload coverage
-        uses: codecov/codecov-action@v3
+        uses: codecov/codecov-action@v4
         with:
           files: ./cobertura.xml
           fail_ci_if_error: false
