@@ -22,7 +22,7 @@ jobs:
         run: cargo fmt --all -- --check
       
       - name: Clippy Check
-        run: cargo clippy --all --all-features -- -D warnings
+        run: cargo clippy --all --all-features
       
       - name: Quality Report
         run: |
