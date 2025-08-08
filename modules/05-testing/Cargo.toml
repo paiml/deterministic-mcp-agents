@@ -1,0 +1,31 @@
+[package]
+name = "module-05-testing"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+
+[[bin]]
+name = "16_property_tests"
+path = "examples/16_property_tests.rs"
+
+[[bin]]
+name = "17_fuzzing"
+path = "examples/17_fuzzing.rs"
+
+[[bin]]
+name = "18_integration_tests"
+path = "examples/18_integration_tests.rs"
+
+[dependencies]
+pmcp = { path = "../../pmcp" }
+tokio = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+quickcheck = { workspace = true }
+quickcheck_macros = { workspace = true }
+proptest = { workspace = true }
+futures = { workspace = true }
+
+[dev-dependencies]
+criterion = { workspace = true }

@@ -1,0 +1,38 @@
+[package]
+name = "module-03-agents"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+
+[[bin]]
+name = "08_fsm_builder"
+path = "examples/08_fsm_builder.rs"
+
+[[bin]]
+name = "09_refactor_fsm"
+path = "examples/09_refactor_fsm.rs"
+
+[[bin]]
+name = "10_code_analysis_fsm"
+path = "examples/10_code_analysis_fsm.rs"
+
+[[bin]]
+name = "11_error_boundaries"
+path = "examples/11_error_boundaries.rs"
+
+[dependencies]
+pmcp = { path = "../../pmcp" }
+tokio = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+thiserror = { workspace = true }
+tracing = { workspace = true }
+tracing-subscriber = { workspace = true }
+async-trait = { workspace = true }
+
+[dev-dependencies]
+quickcheck = { workspace = true }
+quickcheck_macros = { workspace = true }
+criterion = { workspace = true }
+proptest = { workspace = true }

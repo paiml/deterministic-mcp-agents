@@ -1,0 +1,40 @@
+[package]
+name = "module-02-setup"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+
+[[bin]]
+name = "04_toolchain_setup"
+path = "examples/04_toolchain_setup.rs"
+
+[[bin]]
+name = "05_pmat_validator"
+path = "examples/05_pmat_validator.rs"
+
+[[bin]]
+name = "06_quality_gates"
+path = "examples/06_quality_gates.rs"
+
+[[bin]]
+name = "07_calculator_agent"
+path = "examples/07_calculator_agent.rs"
+
+[dependencies]
+pmcp = { path = "../../pmcp" }
+tokio = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+thiserror = { workspace = true }
+tracing = { workspace = true }
+tracing-subscriber = { workspace = true }
+anyhow = { workspace = true }
+toml = "0.8"
+serde_yaml = "0.9"
+
+[dev-dependencies]
+quickcheck = { workspace = true }
+quickcheck_macros = { workspace = true }
+criterion = { workspace = true }
+proptest = { workspace = true }

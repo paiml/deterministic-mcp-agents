@@ -1,0 +1,38 @@
+[package]
+name = "module-04-mcp-server"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+
+[[bin]]
+name = "12_pmcp_server"
+path = "examples/12_pmcp_server.rs"
+
+[[bin]]
+name = "13_tool_composition"
+path = "examples/13_tool_composition.rs"
+
+[[bin]]
+name = "14_async_handler"
+path = "examples/14_async_handler.rs"
+
+[[bin]]
+name = "15_production_server"
+path = "examples/15_production_server.rs"
+
+[dependencies]
+pmcp = { path = "../../pmcp" }
+tokio = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+thiserror = { workspace = true }
+tracing = { workspace = true }
+async-trait = { workspace = true }
+futures = { workspace = true }
+tokio-util = "0.7"
+
+[dev-dependencies]
+quickcheck = { workspace = true }
+quickcheck_macros = { workspace = true }
+criterion = { workspace = true }
