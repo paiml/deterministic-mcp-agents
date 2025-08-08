@@ -1,12 +1,15 @@
 # Deterministic MCP Agents Course
 
-[![PMAT Quality Gate](https://github.com/paiml/deterministic-mcp-agents-course/workflows/PMAT%20Quality%20Gate/badge.svg)](https://github.com/paiml/deterministic-mcp-agents-course/actions)
-[![Coverage](https://img.shields.io/badge/coverage-80%25+-brightgreen.svg)](https://github.com/paiml/deterministic-mcp-agents-course/actions)
+[![Master CI](https://github.com/paiml/deterministic-mcp-agents/workflows/Master%20CI/badge.svg)](https://github.com/paiml/deterministic-mcp-agents/actions/workflows/master.yml)
+[![Build](https://github.com/paiml/deterministic-mcp-agents/workflows/Build/badge.svg)](https://github.com/paiml/deterministic-mcp-agents/actions/workflows/build.yml)
+[![Tests](https://github.com/paiml/deterministic-mcp-agents/workflows/Tests/badge.svg)](https://github.com/paiml/deterministic-mcp-agents/actions/workflows/tests.yml)
+[![Quality](https://github.com/paiml/deterministic-mcp-agents/workflows/Quality/badge.svg)](https://github.com/paiml/deterministic-mcp-agents/actions/workflows/quality.yml)
+[![Coverage](https://img.shields.io/badge/coverage-80%25+-brightgreen.svg)](https://github.com/paiml/deterministic-mcp-agents/actions)
 [![Rust](https://img.shields.io/badge/rust-1.75%2B-orange.svg)](https://www.rust-lang.org)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![PMAT](https://img.shields.io/badge/PMAT-0.29.6%2B-blue.svg)](https://github.com/paiml/pmat)
-[![Docker](https://img.shields.io/badge/docker-ready-blue.svg)](https://hub.docker.com)
+[![PMAT](https://img.shields.io/badge/PMAT-ready-blue.svg)](https://github.com/paiml/pmat)
 [![Examples](https://img.shields.io/badge/examples-19-green.svg)](./modules)
+[![Modules](https://img.shields.io/badge/modules-5-blue.svg)](./modules)
 
 A comprehensive course implementation for building production-ready MCP (Model Context Protocol) agents with deterministic finite state machines in Rust.
 

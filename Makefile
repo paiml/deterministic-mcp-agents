@@ -177,6 +177,18 @@ run-module-5:
 run-all: build test run-examples quality-gate-all coverage
 	@echo "🎉 All targets completed successfully!"
 
+# CI target for GitHub Actions
+ci: fmt-check clippy build test
+	@echo "✅ CI checks passed!"
+
+# Quick CI without examples
+ci-quick: fmt-check clippy build test
+	@echo "✅ Quick CI passed!"
+
+# Full CI with everything
+ci-full: ci quality-gate coverage run-examples
+	@echo "🎉 Full CI passed!"
+
 # Quality report generation
 quality-report:
 	@echo "📊 Generating Quality Report..."
