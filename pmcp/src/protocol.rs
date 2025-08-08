@@ -19,14 +19,17 @@ pub enum Message {
     Notification(crate::Notification),
 }
 
+#[must_use]
 pub fn is_request(msg: &serde_json::Value) -> bool {
     msg.get("method").is_some() && msg.get("id").is_some()
 }
 
+#[must_use]
 pub fn is_notification(msg: &serde_json::Value) -> bool {
     msg.get("method").is_some() && msg.get("id").is_none()
 }
 
+#[must_use]
 pub fn is_response(msg: &serde_json::Value) -> bool {
     msg.get("result").is_some() || msg.get("error").is_some()
 }

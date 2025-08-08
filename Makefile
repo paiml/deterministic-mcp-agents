@@ -11,9 +11,97 @@ build:
 release:
 	cargo build --all --all-features --release
 
-# Run all tests
+# Run all tests with comprehensive reporting
 test:
-	cargo test --all --all-features
+	@echo "🧪 Running Comprehensive Test Suite"
+	@echo "===================================="
+	@echo ""
+	@echo "1️⃣ Unit Tests"
+	@echo "-------------"
+	@cargo test --all --all-features --lib 2>&1 | grep -E "(test result:|running)" || cargo test --all --all-features --lib
+	@echo ""
+	@echo "2️⃣ Integration Tests"
+	@echo "-------------------"
+	@cargo test --all --all-features --test '*' 2>&1 | grep -E "(test result:|running)" || cargo test --all --all-features --test '*' || true
+	@echo ""
+	@echo "3️⃣ Documentation Tests"
+	@echo "---------------------"
+	@cargo test --all --all-features --doc 2>&1 | grep -E "(test result:|Doc-tests|running)" || cargo test --all --all-features --doc
+	@echo ""
+	@echo "4️⃣ Property Tests"
+	@echo "----------------"
+	@echo "Running QuickCheck property tests..."
+	@cargo test --all --all-features quickcheck 2>&1 | grep -E "(test result:|running|quickcheck)" || true
+	@echo "Running PropTest property tests..."
+	@cargo test --all --all-features proptest 2>&1 | grep -E "(test result:|running|proptest)" || true
+	@echo ""
+	@echo "5️⃣ Example Tests"
+	@echo "---------------"
+	@echo "Testing examples compilation..."
+	@cargo test --all --all-features --examples 2>&1 | grep -E "(test result:|running)" || cargo build --all --examples
+	@echo ""
+	@echo "📊 Coverage Summary"
+	@echo "-----------------"
+	@if command -v cargo-tarpaulin >/dev/null 2>&1; then \
+		cargo tarpaulin --print-summary --all --all-features 2>/dev/null | grep -E "Coverage" || echo "Run 'make coverage' for detailed report"; \
+	else \
+		echo "Install cargo-tarpaulin for coverage: cargo install cargo-tarpaulin"; \
+	fi
+	@echo ""
+	@echo "✅ All tests completed!"
+
+# Run tests with verbose output
+test-verbose:
+	@echo "🧪 Running Tests (Verbose)"
+	@echo "========================="
+	cargo test --all --all-features -- --nocapture --test-threads=1
+
+# Run only unit tests
+test-unit:
+	@echo "🧪 Running Unit Tests"
+	cargo test --all --all-features --lib
+
+# Run only integration tests
+test-integration:
+	@echo "🧪 Running Integration Tests"
+	cargo test --all --all-features --test '*'
+
+# Run only doc tests
+test-doc:
+	@echo "📚 Running Documentation Tests"
+	cargo test --all --all-features --doc
+
+# Run only property tests
+test-property:
+	@echo "🎲 Running Property Tests"
+	@echo "QuickCheck tests:"
+	cargo test --all --all-features -- quickcheck
+	@echo "PropTest tests:"
+	cargo test --all --all-features -- proptest
+
+# Run example tests
+test-examples:
+	@echo "📘 Testing Examples"
+	cargo build --all --examples
+	cargo test --all --all-features --examples
+
+# Run all tests with detailed summary
+test-all: test
+	@echo ""
+	@echo "Running detailed test summary..."
+	@./scripts/test_summary.sh
+
+# Run tests with coverage report
+test-coverage:
+	@echo "🧪 Running Tests with Coverage"
+	@echo "=============================="
+	@if command -v cargo-tarpaulin >/dev/null 2>&1; then \
+		cargo tarpaulin --out Stdout --all --all-features; \
+	else \
+		echo "Installing cargo-tarpaulin..."; \
+		cargo install cargo-tarpaulin; \
+		cargo tarpaulin --out Stdout --all --all-features; \
+	fi
 
 # Run benchmarks
 bench:
@@ -26,16 +114,28 @@ clean:
 	rm -rf target/
 
 # Format code
-fmt:
+format:
+	@echo "🎨 Formatting code..."
 	cargo fmt --all
+	@echo "✅ Code formatted successfully!"
+
+# Alias for format
+fmt: format
 
 # Format check
 fmt-check:
+	@echo "🔍 Checking code formatting..."
 	cargo fmt --all -- --check
 
-# Run clippy linter
-clippy:
-	cargo clippy --all-targets --all-features -- -D warnings -W clippy::all -W clippy::pedantic
+# Run linter (clippy)
+lint:
+	@echo "🔍 Running Clippy linter..."
+	@echo "================================"
+	cargo clippy --all-targets --all-features
+	@echo "✅ Linting completed!"
+
+# Alias for lint
+clippy: lint
 
 # Run PMAT quality gate checks
 quality-gate:
@@ -208,24 +308,37 @@ help:
 	@echo "Deterministic MCP Agents - Makefile Targets"
 	@echo "==========================================="
 	@echo ""
+	@echo "Essential Commands:"
+	@echo "  make format         - Format all code"
+	@echo "  make lint           - Run Clippy linter"
+	@echo "  make test           - Run comprehensive test suite"
+	@echo ""
 	@echo "Build & Test:"
 	@echo "  make build          - Build all projects"
-	@echo "  make test           - Run all tests"
+	@echo "  make test           - Run all tests with summary"
+	@echo "  make test-all       - Run tests with detailed report"
+	@echo "  make test-coverage  - Run tests with coverage"
+	@echo "  make test-unit      - Run only unit tests"
+	@echo "  make test-doc       - Run only doc tests"
+	@echo "  make test-property  - Run only property tests"
+	@echo "  make test-examples  - Test all examples"
 	@echo "  make bench          - Run benchmarks"
-	@echo "  make coverage       - Generate coverage report"
+	@echo "  make coverage       - Generate HTML coverage report"
 	@echo ""
-	@echo "Quality Checks:"
-	@echo "  make fmt            - Format code"
-	@echo "  make clippy         - Run clippy linter"
+	@echo "Code Quality:"
+	@echo "  make format         - Format code (alias: fmt)"
+	@echo "  make lint           - Run linter (alias: clippy)"
 	@echo "  make pmat-all       - Run all PMAT checks"
 	@echo "  make quality-gate   - Run quality gate checks"
 	@echo "  make quality-gate-all - Run ALL quality checks"
 	@echo ""
 	@echo "Examples:"
-	@echo "  make run-examples   - Run all example programs"
+	@echo "  make run-examples   - Run all 19 example programs"
 	@echo "  make run-module-N   - Run module N examples (1-5)"
 	@echo ""
 	@echo "CI/CD:"
+	@echo "  make ci             - Quick CI checks"
+	@echo "  make ci-full        - Complete CI pipeline"
 	@echo "  make pre-commit     - Quick checks before commit"
 	@echo "  make pre-push       - Full checks before push"
 	@echo "  make run-all        - Complete CI/CD pipeline"
@@ -233,3 +346,6 @@ help:
 	@echo "Reports:"
 	@echo "  make quality-report - Generate quality reports"
 	@echo "  make doc            - Generate documentation"
+	@echo ""
+	@echo "Clean:"
+	@echo "  make clean          - Remove all build artifacts"

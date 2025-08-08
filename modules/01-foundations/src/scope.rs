@@ -18,11 +18,9 @@ impl ScopeAnalyzer for DomainScope {
         let complexity = self.kolmogorov_complexity(domain);
         1.0 - (complexity as f64 / self.max_complexity as f64).min(1.0)
     }
-    
+
     fn kolmogorov_complexity(&self, data: &str) -> usize {
-        let compressed = data.chars()
-            .collect::<std::collections::HashSet<_>>()
-            .len();
+        let compressed = data.chars().collect::<std::collections::HashSet<_>>().len();
         compressed * data.len().ilog2() as usize
     }
 }
@@ -41,21 +39,21 @@ pub fn verify_constraint(certainty: f64, scope: f64) -> bool {
 mod tests {
     use super::*;
     use proptest::prelude::*;
-    
+
     #[test]
     fn test_scope_analysis() {
         let analyzer = DomainScope::new(1000);
         let scope = analyzer.analyze("simple_domain");
         assert!(scope > 0.0 && scope <= 1.0);
     }
-    
+
     #[test]
     fn test_tradeoff_constraint() {
         assert!(verify_constraint(1.0, 0.5));
         assert!(verify_constraint(0.5, 1.0));
         assert!(!verify_constraint(1.0, 1.1));
     }
-    
+
     proptest! {
         #[test]
         fn prop_tradeoff_constraint(certainty in 0.0..=1.0, scope in 0.0..=1.0) {

@@ -1,6 +1,7 @@
-use crate::{Result, Tool};
+use crate::Tool;
 use serde_json::json;
 
+#[must_use]
 pub fn calculator_tool() -> Tool {
     Tool {
         name: "calculator".to_string(),
@@ -24,6 +25,7 @@ pub fn calculator_tool() -> Tool {
     }
 }
 
+#[must_use]
 pub fn analyze_complexity_tool() -> Tool {
     Tool {
         name: "analyze_complexity".to_string(),
@@ -44,6 +46,7 @@ pub fn analyze_complexity_tool() -> Tool {
     }
 }
 
+#[must_use]
 pub fn extract_files_tool() -> Tool {
     Tool {
         name: "extract_files".to_string(),
@@ -66,6 +69,7 @@ pub fn extract_files_tool() -> Tool {
     }
 }
 
+#[must_use]
 pub fn deep_analysis_tool() -> Tool {
     Tool {
         name: "deep_analysis".to_string(),

@@ -5,19 +5,19 @@ edition.workspace = true
 authors.workspace = true
 license.workspace = true
 
-[[bin]]
+[[example]]
 name = "04_toolchain_setup"
 path = "examples/04_toolchain_setup.rs"
 
-[[bin]]
+[[example]]
 name = "05_pmat_validator"
 path = "examples/05_pmat_validator.rs"
 
-[[bin]]
+[[example]]
 name = "06_quality_gates"
 path = "examples/06_quality_gates.rs"
 
-[[bin]]
+[[example]]
 name = "07_calculator_agent"
 path = "examples/07_calculator_agent.rs"
 

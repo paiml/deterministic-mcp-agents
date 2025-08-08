@@ -15,21 +15,27 @@ pub struct Server {
 }
 
 impl Server {
+    #[must_use]
     pub fn new(capabilities: ServerCapabilities) -> Self {
         Self {
             capabilities,
             handlers: Arc::new(RwLock::new(std::collections::HashMap::new())),
         }
     }
-    
+
     pub async fn register_tool(&self, tool: Tool, handler: Box<dyn ToolHandler>) {
         let mut handlers = self.handlers.write().await;
         handlers.insert(tool.name.clone(), handler);
     }
-    
+
+    /// Handles incoming requests and returns appropriate responses.
+    ///
+    /// # Errors
+    ///
+    /// Returns an error if the handler fails to process the request.
     pub async fn handle_request(&self, request: Request) -> Result<Response> {
         let handlers = self.handlers.read().await;
-        
+
         if let Some(handler) = handlers.get(&request.method) {
             match handler.handle(request.params).await {
                 Ok(result) => Ok(Response {
@@ -62,7 +68,8 @@ impl Server {
             })
         }
     }
-    
+
+    #[must_use]
     pub fn capabilities(&self) -> &ServerCapabilities {
         &self.capabilities
     }
@@ -73,22 +80,26 @@ pub struct ServerBuilder {
 }
 
 impl ServerBuilder {
+    #[must_use]
     pub fn new() -> Self {
         Self {
             capabilities: ServerCapabilities::default(),
         }
     }
-    
+
+    #[must_use]
     pub fn with_tool(mut self, tool: Tool) -> Self {
         self.capabilities.tools.push(tool);
         self
     }
-    
+
+    #[must_use]
     pub fn with_max_request_size(mut self, size: usize) -> Self {
         self.capabilities.max_request_size = size;
         self
     }
-    
+
+    #[must_use]
     pub fn build(self) -> Server {
         Server::new(self.capabilities)
     }

@@ -1,6 +1,3 @@
-use crate::certainty::CertaintyCalculator;
-use crate::scope::ScopeAnalyzer;
-
 pub struct EpistemicCertainty {
     verification_level: f64,
 }
@@ -9,7 +6,7 @@ impl EpistemicCertainty {
     pub fn new(verification_level: f64) -> Self {
         Self { verification_level }
     }
-    
+
     pub fn calculate(&self, proof_steps: usize) -> f64 {
         if proof_steps > 0 {
             (self.verification_level * proof_steps as f64 / 100.0).min(1.0)
@@ -27,7 +24,7 @@ impl MappingScope {
     pub fn new(io_complexity: usize) -> Self {
         Self { io_complexity }
     }
-    
+
     pub fn calculate(&self, input_dims: usize, output_dims: usize) -> f64 {
         let total = input_dims * output_dims;
         (total as f64 / self.io_complexity as f64).min(1.0)
@@ -46,7 +43,7 @@ impl HybridArchitecture {
             learning_envelope: LearningEnvelope::new(),
         }
     }
-    
+
     pub fn execute(&self, input: &str) -> (f64, f64) {
         let certainty = self.verified_kernel.certainty(input);
         let scope = self.learning_envelope.scope(input);
@@ -74,7 +71,7 @@ impl VerifiedKernel {
             ],
         }
     }
-    
+
     pub fn certainty(&self, input: &str) -> f64 {
         if self.axioms.iter().any(|a| input.contains(a.as_str())) {
             1.0
@@ -100,7 +97,7 @@ impl LearningEnvelope {
             model_confidence: 0.75,
         }
     }
-    
+
     pub fn scope(&self, input: &str) -> f64 {
         let complexity_factor = (input.len() as f64 / 50.0).min(1.0);
         self.model_confidence * complexity_factor
@@ -116,7 +113,7 @@ impl Default for LearningEnvelope {
 #[cfg(test)]
 mod tests {
     use super::*;
-    
+
     #[test]
     fn test_epistemic_certainty() {
         let ec = EpistemicCertainty::new(0.9);
@@ -124,14 +121,14 @@ mod tests {
         assert!(ec.calculate(50) > 0.0);
         assert_eq!(ec.calculate(200), 1.0);
     }
-    
+
     #[test]
     fn test_mapping_scope() {
         let ms = MappingScope::new(100);
         let scope = ms.calculate(10, 5);
         assert!(scope > 0.0 && scope <= 1.0);
     }
-    
+
     #[test]
     fn test_hybrid_architecture() {
         let hybrid = HybridArchitecture::new();

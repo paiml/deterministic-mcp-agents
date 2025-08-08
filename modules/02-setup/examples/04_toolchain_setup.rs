@@ -5,7 +5,7 @@ use toml::Value;
 fn main() {
     println!("Rust Toolchain Configuration");
     println!("============================\n");
-    
+
     generate_optimal_cargo_toml();
     configure_clippy();
     setup_pre_commit_hooks();
@@ -17,7 +17,7 @@ fn main() {
 
 fn generate_optimal_cargo_toml() {
     println!("📦 Generating Optimal Cargo.toml:");
-    
+
     let cargo_toml = r#"[package]
 name = "optimized-project"
 version = "0.1.0"
@@ -39,14 +39,14 @@ debug = true
 
 [profile.test]
 opt-level = 0        # Fast test compilation"#;
-    
+
     println!("{}", indent(cargo_toml, 2));
     println!("  ✅ Optimization settings configured");
 }
 
 fn configure_clippy() {
     println!("\n📎 Clippy Configuration (.clippy.toml):");
-    
+
     let clippy_config = r#"avoid-breaking-exported-api = false
 msrv = "1.75.0"
 warn-on-all-wildcard-imports = true
@@ -62,9 +62,9 @@ reason = "use expect() or proper error handling"
 [[disallowed-methods]]
 path = "std::result::Result::unwrap"
 reason = "use expect() or proper error handling""#;
-    
+
     println!("{}", indent(clippy_config, 2));
-    
+
     let lints = vec![
         "clippy::all",
         "clippy::pedantic",
@@ -72,7 +72,7 @@ reason = "use expect() or proper error handling""#;
         "clippy::cargo",
         "clippy::restriction",
     ];
-    
+
     println!("\n  Recommended lints:");
     for lint in lints {
         println!("    - {}", lint);
@@ -81,7 +81,7 @@ reason = "use expect() or proper error handling""#;
 
 fn setup_pre_commit_hooks() {
     println!("\n🪝 Pre-commit Hooks (.git/hooks/pre-commit):");
-    
+
     let pre_commit = r#"#!/bin/bash
 set -e
 
@@ -115,24 +115,30 @@ pmat analyze dead-code --max-percentage 5.0 --fail-on-violation
 
 echo "✅ All pre-commit checks passed!"
 exit 0"#;
-    
+
     println!("{}", indent(pre_commit, 2));
 }
 
 fn create_makefile_targets() {
     println!("\n🎯 Makefile Targets:");
-    
+
     let targets = vec![
         ("build", "cargo build --all --all-features"),
         ("test", "cargo test --all --all-features"),
         ("bench", "cargo bench --all"),
         ("fmt", "cargo fmt --all"),
-        ("clippy", "cargo clippy --all-targets --all-features -- -D warnings"),
+        (
+            "clippy",
+            "cargo clippy --all-targets --all-features -- -D warnings",
+        ),
         ("quality", "pmat quality-gate --fail-on-violation"),
-        ("coverage", "cargo tarpaulin --out Html --output-dir coverage"),
+        (
+            "coverage",
+            "cargo tarpaulin --out Html --output-dir coverage",
+        ),
         ("doc", "cargo doc --all --all-features --no-deps --open"),
     ];
-    
+
     for (name, command) in targets {
         println!("  {:-12} : {}", name, command);
     }
@@ -140,7 +146,7 @@ fn create_makefile_targets() {
 
 fn configure_rust_analyzer() {
     println!("\n🔧 Rust Analyzer Settings (.vscode/settings.json):");
-    
+
     let settings = r#"{
   "rust-analyzer.cargo.allFeatures": true,
   "rust-analyzer.checkOnSave.command": "clippy",
@@ -161,13 +167,13 @@ fn configure_rust_analyzer() {
   "rust-analyzer.lens.implementations": true,
   "rust-analyzer.procMacro.enable": true
 }"#;
-    
+
     println!("{}", indent(settings, 2));
 }
 
 fn setup_criterion_benchmarking() {
     println!("\n📊 Criterion Benchmarking Setup:");
-    
+
     let bench_example = r#"use criterion::{black_box, criterion_group, criterion_main, Criterion};
 
 fn fibonacci(n: u64) -> u64 {
@@ -186,7 +192,7 @@ fn criterion_benchmark(c: &mut Criterion) {
 
 criterion_group!(benches, criterion_benchmark);
 criterion_main!(benches);"#;
-    
+
     println!("{}", indent(bench_example, 2));
     println!("\n  ✅ Criterion harness configured");
 }
@@ -208,7 +214,7 @@ fn indent(s: &str, spaces: usize) -> String {
 #[cfg(test)]
 mod tests {
     use super::*;
-    
+
     #[test]
     fn test_indent() {
         let text = "line1\nline2";

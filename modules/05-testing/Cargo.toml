@@ -5,15 +5,15 @@ edition.workspace = true
 authors.workspace = true
 license.workspace = true
 
-[[bin]]
+[[example]]
 name = "16_property_tests"
 path = "examples/16_property_tests.rs"
 
-[[bin]]
+[[example]]
 name = "17_fuzzing"
 path = "examples/17_fuzzing.rs"
 
-[[bin]]
+[[example]]
 name = "18_integration_tests"
 path = "examples/18_integration_tests.rs"
 

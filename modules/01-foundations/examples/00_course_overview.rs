@@ -7,10 +7,10 @@ fn main() {
         .with_max_level(Level::INFO)
         .finish();
     tracing::subscriber::set_global_default(subscriber).unwrap();
-    
+
     info!("Deterministic MCP Agents Course - Overview");
     info!("=========================================");
-    
+
     repository_walkthrough();
     performance_baseline();
     quality_metrics();
@@ -32,16 +32,16 @@ fn repository_walkthrough() {
 
 fn performance_baseline() {
     info!("\n⚡ Performance Baseline:");
-    
+
     let start = Instant::now();
     for _ in 0..10000 {
         let _ = std::hint::black_box(42 + 58);
     }
     let duration = start.elapsed();
-    
+
     let per_op = duration.as_nanos() / 10000;
     info!("  Basic operation: {}ns", per_op);
-    
+
     if per_op < 100 {
         info!("  ✅ Performance target met (<100ns)");
     } else {
@@ -72,7 +72,7 @@ fn test_coverage() {
 #[cfg(test)]
 mod tests {
     use super::*;
-    
+
     #[test]
     fn test_performance_baseline() {
         let start = Instant::now();

@@ -16,12 +16,14 @@ pub struct RefactorFsm {
 }
 
 impl RefactorFsm {
+    #[must_use]
     pub fn new() -> Self {
         Self {
             state: RefactorState::Init,
         }
     }
-    
+
+    #[must_use]
     pub fn state(&self) -> RefactorState {
         self.state
     }

@@ -2,28 +2,27 @@
 #![allow(clippy::module_name_repetitions)]
 
 use serde::{Deserialize, Serialize};
-use std::collections::HashMap;
 use thiserror::Error;
 
-pub mod server;
-pub mod transport;
 pub mod protocol;
+pub mod server;
 pub mod tools;
+pub mod transport;
 
 #[derive(Error, Debug)]
 pub enum PmcpError {
     #[error("Transport error: {0}")]
     Transport(String),
-    
+
     #[error("Protocol error: {0}")]
     Protocol(String),
-    
+
     #[error("Tool error: {0}")]
     Tool(String),
-    
+
     #[error("Server error: {0}")]
     Server(String),
-    
+
     #[error("JSON-RPC error: {code}: {message}")]
     JsonRpc { code: i32, message: String },
 }

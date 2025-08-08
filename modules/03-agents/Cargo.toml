@@ -5,19 +5,19 @@ edition.workspace = true
 authors.workspace = true
 license.workspace = true
 
-[[bin]]
+[[example]]
 name = "08_fsm_builder"
 path = "examples/08_fsm_builder.rs"
 
-[[bin]]
+[[example]]
 name = "09_refactor_fsm"
 path = "examples/09_refactor_fsm.rs"
 
-[[bin]]
+[[example]]
 name = "10_code_analysis_fsm"
 path = "examples/10_code_analysis_fsm.rs"
 
-[[bin]]
+[[example]]
 name = "11_error_boundaries"
 path = "examples/11_error_boundaries.rs"
 

@@ -1,5 +1,4 @@
 use std::marker::PhantomData;
-use std::collections::HashMap;
 
 pub struct FsmBuilder<S, E> {
     initial_state: Option<S>,
@@ -7,14 +6,18 @@ pub struct FsmBuilder<S, E> {
     _phantom: PhantomData<(S, E)>,
 }
 
+type GuardFn<S, E> = Box<dyn Fn(&S, &E) -> bool>;
+
+#[allow(dead_code)]
 pub struct Transition<S, E> {
     from: S,
     to: S,
     event: E,
-    guard: Option<Box<dyn Fn(&S, &E) -> bool>>,
+    guard: Option<GuardFn<S, E>>,
 }
 
 impl<S: Clone, E> FsmBuilder<S, E> {
+    #[must_use]
     pub fn new() -> Self {
         Self {
             initial_state: None,
@@ -22,12 +25,14 @@ impl<S: Clone, E> FsmBuilder<S, E> {
             _phantom: PhantomData,
         }
     }
-    
+
+    #[must_use]
     pub fn initial_state(mut self, state: S) -> Self {
         self.initial_state = Some(state);
         self
     }
-    
+
+    #[must_use]
     pub fn transition(mut self, from: S, to: S, event: E) -> Self {
         self.transitions.push(Transition {
             from,
@@ -36,5 +41,11 @@ impl<S: Clone, E> FsmBuilder<S, E> {
             guard: None,
         });
         self
+    }
+}
+
+impl<S: Clone, E> Default for FsmBuilder<S, E> {
+    fn default() -> Self {
+        Self::new()
     }
 }

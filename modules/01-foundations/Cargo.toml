@@ -5,19 +5,19 @@ edition.workspace = true
 authors.workspace = true
 license.workspace = true
 
-[[bin]]
+[[example]]
 name = "00_course_overview"
 path = "examples/00_course_overview.rs"
 
-[[bin]]
+[[example]]
 name = "01_certainty_scope_demo"
 path = "examples/01_certainty_scope_demo.rs"
 
-[[bin]]
+[[example]]
 name = "02_floridi_conjecture"
 path = "examples/02_floridi_conjecture.rs"
 
-[[bin]]
+[[example]]
 name = "03_mcp_protocol_basics"
 path = "examples/03_mcp_protocol_basics.rs"
 

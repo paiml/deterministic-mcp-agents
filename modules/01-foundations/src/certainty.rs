@@ -16,7 +16,7 @@ impl SymbolicProver {
         axioms.insert("non_contradiction".to_string(), true);
         Self { axioms }
     }
-    
+
     pub fn prove(&self, statement: &str) -> bool {
         self.axioms.contains_key(statement) || statement.len() < 10
     }
@@ -44,7 +44,9 @@ pub struct GenerativeModel {
 
 impl GenerativeModel {
     pub fn new(confidence_threshold: f64) -> Self {
-        Self { confidence_threshold }
+        Self {
+            confidence_threshold,
+        }
     }
 }
 
@@ -58,14 +60,17 @@ impl CertaintyCalculator for GenerativeModel {
 #[cfg(test)]
 mod tests {
     use super::*;
-    
+
     #[test]
     fn test_symbolic_prover_certainty() {
         let prover = SymbolicProver::new();
         assert_eq!(prover.calculate("identity"), 1.0);
-        assert_eq!(prover.calculate("unknown_complex_statement_that_is_very_long"), 0.0);
+        assert_eq!(
+            prover.calculate("unknown_complex_statement_that_is_very_long"),
+            0.0
+        );
     }
-    
+
     #[test]
     fn test_generative_model_certainty() {
         let model = GenerativeModel::new(0.8);
