@@ -212,34 +212,52 @@ pre-commit: fmt clippy test
 pre-push: quality-gate-all coverage
 
 # Run all example programs
-run-examples:
-	@echo "🚀 Running All Example Programs"
-	@echo "==============================="
-	@echo "\n📚 Module 1: Foundations"
-	cargo run --bin 00_course_overview --quiet
-	cargo run --bin 01_certainty_scope_demo --quiet
-	cargo run --bin 02_floridi_conjecture --quiet
-	cargo run --bin 03_mcp_protocol_basics --quiet
+run-all-examples: run-module-1 run-module-2 run-module-3 run-module-4 run-module-5
+	@echo "\n✅ All 19 examples completed successfully!"
+
+# Run Module 1 examples
+run-module-1:
+	@echo "📚 Module 1: Foundations"
+	@echo "====================="
+	@cd modules/01-foundations && cargo run --example 00_course_overview --quiet
+	@cd modules/01-foundations && cargo run --example 01_certainty_scope_demo --quiet
+	@cd modules/01-foundations && cargo run --example 02_floridi_conjecture --quiet
+	@cd modules/01-foundations && cargo run --example 03_mcp_protocol_basics --quiet
+
+# Run Module 2 examples
+run-module-2:
 	@echo "\n🔧 Module 2: Environment Setup"
-	cargo run --bin 04_toolchain_setup --quiet
-	cargo run --bin 05_pmat_validator --quiet
-	cargo run --bin 06_quality_gates --quiet
-	cargo run --bin 07_calculator_agent --quiet
+	@echo "==========================="
+	@cd modules/02-setup && cargo run --example 04_toolchain_setup --quiet
+	@cd modules/02-setup && cargo run --example 05_pmat_validator --quiet
+	@cd modules/02-setup && cargo run --example 06_quality_gates --quiet
+	@cd modules/02-setup && cargo run --example 07_calculator_agent --quiet
+
+# Run Module 3 examples
+run-module-3:
 	@echo "\n🤖 Module 3: Production Agents"
-	cargo run --bin 08_fsm_builder --quiet
-	cargo run --bin 09_refactor_fsm --quiet
-	cargo run --bin 10_code_analysis_fsm --quiet
-	cargo run --bin 11_error_boundaries --quiet
+	@echo "==========================="
+	@cd modules/03-agents && cargo run --example 08_fsm_builder --quiet
+	@cd modules/03-agents && cargo run --example 09_refactor_fsm --quiet
+	@cd modules/03-agents && cargo run --example 10_code_analysis_fsm --quiet
+	@cd modules/03-agents && cargo run --example 11_error_boundaries --quiet
+
+# Run Module 4 examples
+run-module-4:
 	@echo "\n🌐 Module 4: MCP Server"
-	cargo run --bin 12_pmcp_server --quiet
-	cargo run --bin 13_tool_composition --quiet
-	cargo run --bin 14_async_handler --quiet
-	cargo run --bin 15_production_server --quiet
+	@echo "====================="
+	@cd modules/04-mcp-server && cargo run --example 12_pmcp_server --quiet
+	@cd modules/04-mcp-server && cargo run --example 13_tool_composition --quiet
+	@cd modules/04-mcp-server && cargo run --example 14_async_handler --quiet
+	@cd modules/04-mcp-server && cargo run --example 15_production_server --quiet
+
+# Run Module 5 examples
+run-module-5:
 	@echo "\n🧪 Module 5: Testing & QA"
-	cargo run --bin 16_property_tests --quiet
-	cargo run --bin 17_fuzzing --quiet
-	cargo run --bin 18_integration_tests --quiet
-	@echo "\n✅ All examples executed successfully!"
+	@echo "======================"
+	@cd modules/05-testing && cargo run --example 16_property_tests --quiet
+	@cd modules/05-testing && cargo run --example 17_fuzzing --quiet
+	@cd modules/05-testing && cargo run --example 18_integration_tests --quiet
 
 # Run specific module examples
 run-module-1:
