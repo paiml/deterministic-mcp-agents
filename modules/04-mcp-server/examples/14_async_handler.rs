@@ -40,19 +40,15 @@ async fn demonstrate_select_pattern() {
 async fn demonstrate_join_pattern() {
     println!("\n🔀 Join! Pattern:");
 
+    async fn task(id: usize, delay: u64) -> String {
+        sleep(Duration::from_millis(delay)).await;
+        format!("Task {}", id)
+    }
+
     let futures = vec![
-        async {
-            sleep(Duration::from_millis(10)).await;
-            "Task 1"
-        },
-        async {
-            sleep(Duration::from_millis(15)).await;
-            "Task 2"
-        },
-        async {
-            sleep(Duration::from_millis(20)).await;
-            "Task 3"
-        },
+        task(1, 10),
+        task(2, 15),
+        task(3, 20),
     ];
 
     let results = join_all(futures).await;

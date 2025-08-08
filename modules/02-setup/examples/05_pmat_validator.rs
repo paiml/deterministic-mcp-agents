@@ -70,7 +70,7 @@ fn check_docker_availability(validator: &PmatValidator) {
     }
 }
 
-fn validate_ci_cd_templates(validator: &PmatValidator) {
+fn validate_ci_cd_templates(_validator: &PmatValidator) {
     println!("\n📋 CI/CD Templates:");
 
     let templates = vec![
@@ -143,7 +143,7 @@ fn measure_baseline_metrics(validator: &PmatValidator) {
 
 fn generate_installation_report(validator: &PmatValidator) {
     println!("\n📄 Installation Report:");
-    println!("=".repeat(50));
+    println!("{}", "=".repeat(50));
 
     let info = PmatInfo {
         version: "0.29.6".to_string(),
