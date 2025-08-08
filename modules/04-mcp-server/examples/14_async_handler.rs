@@ -45,11 +45,7 @@ async fn demonstrate_join_pattern() {
         format!("Task {}", id)
     }
 
-    let futures = vec![
-        task(1, 10),
-        task(2, 15),
-        task(3, 20),
-    ];
+    let futures = vec![task(1, 10), task(2, 15), task(3, 20)];
 
     let results = join_all(futures).await;
     for (i, result) in results.iter().enumerate() {
