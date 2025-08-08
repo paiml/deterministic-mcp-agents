@@ -131,8 +131,7 @@ fmt-check:
 lint:
 	@echo "🔍 Running Clippy linter..."
 	@echo "================================"
-	cargo clippy --all-targets --all-features
-	@echo "✅ Linting completed!"
+	@cargo clippy --all-targets --all-features && echo "✅ Linting completed!" || (echo "❌ Linting failed!" && exit 1)
 
 # Alias for lint
 clippy: lint
