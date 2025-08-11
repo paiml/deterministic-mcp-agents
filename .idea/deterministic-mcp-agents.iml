@@ -2,7 +2,21 @@
 <module type="JAVA_MODULE" version="4">
   <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
-    <content url="file://$MODULE_DIR$" />
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/final_project/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/modules/01-foundations/examples" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/modules/01-foundations/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/modules/02-setup/examples" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/modules/02-setup/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/modules/03-agents/examples" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/modules/03-agents/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/modules/04-mcp-server/examples" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/modules/04-mcp-server/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/modules/05-testing/examples" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/modules/05-testing/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/pmcp/src" isTestSource="false" />
+      <excludeFolder url="file://$MODULE_DIR$/target" />
+    </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>

@@ -22,7 +22,7 @@ name = "15_production_server"
 path = "examples/15_production_server.rs"
 
 [dependencies]
-pmcp = "0.1.0"
+pmcp = { path = "../../pmcp" }
 tokio = { workspace = true }
 serde = { workspace = true }
 serde_json = { workspace = true }

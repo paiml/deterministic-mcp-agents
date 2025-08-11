@@ -73,8 +73,14 @@ async fn run_stdio_server(server: Server) -> anyhow::Result<()> {
     loop {
         match transport.receive().await {
             Ok(request) => {
-                let response = server.handle_request(request).await?;
-                transport.send(response).await?;
+                let response = server
+                    .handle_request(request)
+                    .await
+                    .map_err(|e| anyhow::anyhow!("Request handling error: {}", e))?;
+                transport
+                    .send(response)
+                    .await
+                    .map_err(|e| anyhow::anyhow!("Transport send error: {}", e))?;
             }
             Err(e) => {
                 tracing::error!("Transport error: {}", e);

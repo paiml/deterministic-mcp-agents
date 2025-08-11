@@ -22,7 +22,7 @@ name = "03_mcp_protocol_basics"
 path = "examples/03_mcp_protocol_basics.rs"
 
 [dependencies]
-pmcp = "0.1.0"
+pmcp = { path = "../../pmcp" }
 tokio = { workspace = true }
 serde = { workspace = true }
 serde_json = { workspace = true }
