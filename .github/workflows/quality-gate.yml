@@ -205,11 +205,19 @@ jobs:
     
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       
       - name: Generate changelog
         run: |
           echo "## Changes" > CHANGELOG.md
-          git log --oneline --no-merges HEAD~10..HEAD >> CHANGELOG.md
+          # Get the last 10 commits, or all commits if fewer than 10 exist
+          COMMIT_COUNT=$(git rev-list --count HEAD)
+          if [ "$COMMIT_COUNT" -ge 10 ]; then
+            git log --oneline --no-merges HEAD~10..HEAD >> CHANGELOG.md
+          else
+            git log --oneline --no-merges >> CHANGELOG.md
+          fi
       
       - name: Create Release
         if: startsWith(github.ref, 'refs/tags/')
