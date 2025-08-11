@@ -18,7 +18,7 @@ name = "18_integration_tests"
 path = "examples/18_integration_tests.rs"
 
 [dependencies]
-pmcp = { path = "../../pmcp" }
+pmcp = "0.1.0"
 tokio = { workspace = true }
 serde = { workspace = true }
 serde_json = { workspace = true }

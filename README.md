@@ -103,6 +103,13 @@ All code must meet these quality requirements:
 
 This course includes 19 comprehensive examples demonstrating key concepts in building deterministic MCP agents. Each example is fully executable and includes detailed inline documentation.
 
+**Example Distribution by Module:**
+- Module 1 (Foundations): 4 examples
+- Module 2 (Setup): 4 examples
+- Module 3 (Agents): 4 examples
+- Module 4 (MCP Server): 4 examples
+- Module 5 (Testing): 3 examples
+
 ### Module 1: Foundations
 
 #### [00_course_overview.rs](modules/01-foundations/examples/00_course_overview.rs)
@@ -266,28 +273,56 @@ This course includes 19 comprehensive examples demonstrating key concepts in bui
 
 ## Running Examples
 
-### Run All Examples
-```bash
-# Run all examples across all modules
-make run-all-examples
+### Quick Start - Running Individual Examples
 
-# Run examples for a specific module
-make run-module-1  # Foundations
-make run-module-2  # Setup
-make run-module-3  # Agents
-make run-module-4  # MCP Server
-make run-module-5  # Testing
+Each example can be run in three ways:
+
+#### Method 1: From Project Root (Recommended)
+```bash
+# Pattern: cargo run --example <example_name> -p <module_package_name>
+cargo run --example 00_course_overview -p module-01-foundations
+cargo run --example 07_calculator_agent -p module-02-setup
+cargo run --example 11_error_boundaries -p module-03-agents
 ```
 
-### Individual Examples
+#### Method 2: From Module Directory
 ```bash
-# Run any specific example
+# Navigate to the module directory first
 cd modules/01-foundations
 cargo run --example 00_course_overview
 
-# Or from project root
-cargo run --example 01_certainty_scope_demo -p module-01-foundations
+cd ../02-setup
+cargo run --example 07_calculator_agent
 ```
+
+#### Method 3: Using Make Targets
+```bash
+# Run all examples in a specific module
+make run-module-1  # Runs all 4 examples in foundations
+make run-module-2  # Runs all 4 examples in setup
+make run-module-3  # Runs all 4 examples in agents
+make run-module-4  # Runs all 4 examples in mcp-server
+make run-module-5  # Runs all 3 examples in testing
+
+# Run all 19 examples across all modules
+make run-all-examples
+```
+
+### Example Naming Convention
+Examples are numbered sequentially from 00-18:
+- **00-03**: Module 1 (Foundations)
+- **04-07**: Module 2 (Setup)
+- **08-11**: Module 3 (Agents)
+- **12-15**: Module 4 (MCP Server)
+- **16-18**: Module 5 (Testing)
+
+### Package Names for Each Module
+When using `cargo run` from the project root, use these package names:
+- `module-01-foundations` for Module 1 examples
+- `module-02-setup` for Module 2 examples
+- `module-03-agents` for Module 3 examples
+- `module-04-mcp-server` for Module 4 examples
+- `module-05-testing` for Module 5 examples
 
 ## Final Project
 
@@ -324,7 +359,7 @@ Verify course completeness:
 
 Expected output:
 ```
-✅ All 18 examples compile and run
+✅ All 19 examples compile and run
 ✅ All 350+ tests passing
 ✅ Coverage: 96.3% (exceeds 95% requirement)
 ✅ Zero SATD violations

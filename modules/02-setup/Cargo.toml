@@ -22,7 +22,7 @@ name = "07_calculator_agent"
 path = "examples/07_calculator_agent.rs"
 
 [dependencies]
-pmcp = { path = "../../pmcp" }
+pmcp = "0.1.0"
 tokio = { workspace = true }
 serde = { workspace = true }
 serde_json = { workspace = true }

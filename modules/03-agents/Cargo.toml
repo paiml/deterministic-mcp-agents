@@ -22,7 +22,7 @@ name = "11_error_boundaries"
 path = "examples/11_error_boundaries.rs"
 
 [dependencies]
-pmcp = { path = "../../pmcp" }
+pmcp = "0.1.0"
 tokio = { workspace = true }
 serde = { workspace = true }
 serde_json = { workspace = true }
